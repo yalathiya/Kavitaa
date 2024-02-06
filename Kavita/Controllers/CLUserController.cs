@@ -1,11 +1,6 @@
-﻿using Kavita.BL;
+﻿using Kavita.Authentication;
+using Kavita.BL;
 using Kavita.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net;
-using System.Net.Http;
-using System.Web;
 using System.Web.Http;
 
 namespace Kavita.Controllers
@@ -23,6 +18,7 @@ namespace Kavita.Controllers
         /// <param name="username"> Username of the user </param>
         /// <returns> Object of user </returns>
         [HttpGet]
+        [UserAuthentication]
         [Route("get/{username}")]
         public IHttpActionResult GetUser(string username)
         {
@@ -55,6 +51,7 @@ namespace Kavita.Controllers
         /// <returns> "Updated" </returns>
         [HttpPut]
         [Route("Update")]
+        [UserAuthentication]
         public IHttpActionResult UpdateUser([FromBody] Users objUsers)
         {
             BLUser objBLuser = new BLUser();
@@ -71,6 +68,7 @@ namespace Kavita.Controllers
         /// <returns> "Deleted" </returns>
         [HttpDelete]
         [Route("delete/{username}")]
+        [UserAuthentication]
         public IHttpActionResult DeleteUSer(string username)
         {
             BLUser objBLuser = new BLUser();

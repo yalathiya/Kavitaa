@@ -1,23 +1,64 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using Kavita.Connection;
+using Kavita.Models;
+using MongoDB.Driver;
+using System;
 using System.Linq;
-using System.Web;
+using System.Text;
 
 namespace Kavita.BL
 {
     /// <summary>
-    /// It provides buisness logic of functionalities related login
+    /// It provides business logic for functionalities related to login
     /// </summary>
-    public class BLLogin
+    public static class BLLogin
     {
-        internal bool Login(string credential)
+        // Selecting the user collection from the database 
+        private static readonly IMongoCollection<Users> _collectionUsers;
+
+        static BLLogin()
         {
-            throw new NotImplementedException("This is not implemented yet");
+            _collectionUsers = Connect.GetCollection<Users>("Users");
         }
 
-        internal void Logout()
+        /// <summary>
+        /// Authenticate user based on username and password
+        /// </summary>
+        /// <param name="username">Username for authentication</param>
+        /// <param name="password">Password for authentication</param>
+        /// <returns>True if authentication is successful, false otherwise</returns>
+        internal static bool Login(string username, string password)
         {
-            throw new NotImplementedException("This is not implemented yet");
+            try
+            {
+                // Implement your authentication logic here using MongoDB
+                var user = _collectionUsers.Find(u => u.username == username && u.password == password).FirstOrDefault();
+
+                // Check if the user is found in the database
+                if (user != null)
+                {
+                    // Authentication successful
+                    return true;
+                }
+
+                // Authentication failed
+                return false;
+            }
+            catch (Exception ex)
+            {
+                // Handle exceptions (e.g., log or rethrow)
+                Console.WriteLine($"Error during login: {ex.Message}");
+                return false;
+            }
+        }
+
+        /// <summary>
+        /// Perform user logout (if needed)
+        /// </summary>
+        internal static void Logout()
+        {
+            // Implement logout logic if necessary
+            // For example, you may need to invalidate a token or clear session data
+            // This method is currently empty as it depends on your specific requirements
         }
     }
 }

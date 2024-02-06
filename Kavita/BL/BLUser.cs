@@ -1,5 +1,6 @@
 ﻿using Kavita.Connection;
 using Kavita.Models;
+using Kavita.Security;
 using MongoDB.Bson;
 using MongoDB.Bson.Serialization;
 using MongoDB.Driver;
@@ -35,7 +36,16 @@ namespace Kavita.BL
             {
                 throw new Exception("Username already present");
             }
+
+            // Encrypt the password by using Aes Algorithm
+            // Encrypted password will be stored in database
+
+            AesAlgo aes = new AesAlgo();
+            string _encryptedPassword = aes.Encrypt(objUsers.password);
+            objUsers.password = _encryptedPassword;
+
             _collectionUser.InsertOne(objUsers);
+
         }
 
         internal Users DeleteUser(string username)

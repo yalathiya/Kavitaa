@@ -1,9 +1,5 @@
-﻿using Kavita.BL;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net;
-using System.Net.Http;
+﻿using Kavita.Authentication;
+using Kavita.BL;
 using System.Web.Http;
 
 namespace Kavita.Controllers
@@ -17,6 +13,7 @@ namespace Kavita.Controllers
         /// <param name="kavitaId"></param>
         /// <returns></returns>
         [HttpPost]
+        [UserAuthentication]
         [Route("api/like/{kavitaId}/{username}")]
         public IHttpActionResult Like(string username, int kavitaId)
         {
@@ -33,6 +30,7 @@ namespace Kavita.Controllers
         /// <param name="kavitaId"></param>
         /// <returns></returns>
         [HttpPost]
+        [UserAuthentication]
         [Route("api/unlike/{kavitaId}/{username}")]
         public IHttpActionResult Unike(string username, int kavitaId)
         {

@@ -1,5 +1,5 @@
-﻿using Kavita.BL;
-using MongoDB.Bson;
+﻿using Kavita.Authentication;
+using Kavita.BL;
 using System.Web.Http;
 
 namespace Kavita.Controllers
@@ -34,6 +34,7 @@ namespace Kavita.Controllers
         /// <returns> "Added" </returns>
         [HttpPost]
         [Route("Add")]
+        [UserAuthentication]
         public IHttpActionResult AddKavita([FromBody] Kavita.Models.Kavita objKavita)
         {
             BLKavita objBLKavita = new BLKavita();
@@ -50,6 +51,7 @@ namespace Kavita.Controllers
         /// <returns> "Updated" </returns>
         [HttpPut]
         [Route("Update")]
+        [UserAuthentication]
         public IHttpActionResult UpdateUser([FromBody] Kavita.Models.Kavita objKavita)
         {
             BLKavita objBLKavita = new BLKavita();
@@ -66,6 +68,7 @@ namespace Kavita.Controllers
         /// <returns> "Deleted" </returns>
         [HttpDelete]
         [Route("delete/{kavitaId}")]
+        [UserAuthentication]
         public IHttpActionResult DeleteUSer(int kavitaId)
         {
             BLKavita objBLKavita = new BLKavita();
