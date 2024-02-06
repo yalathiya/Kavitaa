@@ -1,10 +1,5 @@
 ﻿using Kavita.BL;
-using Kavita.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net;
-using System.Net.Http;
+using MongoDB.Bson;
 using System.Web.Http;
 
 namespace Kavita.Controllers
@@ -23,7 +18,7 @@ namespace Kavita.Controllers
         /// <returns> Object of kavita </returns>
         /// <summary>
         [HttpGet]
-        [Route("get/{kavitaId}")]
+        [Route("get")]
         public IHttpActionResult GetKavita(int kavitaId)
         {
             BLKavita objBLKavita = new BLKavita();
@@ -53,7 +48,7 @@ namespace Kavita.Controllers
         /// </summary>
         /// <param name="objKavita"> Object of Kavita model </param>
         /// <returns> "Updated" </returns>
-        [HttpPatch]
+        [HttpPut]
         [Route("Update")]
         public IHttpActionResult UpdateUser([FromBody] Kavita.Models.Kavita objKavita)
         {
@@ -69,14 +64,13 @@ namespace Kavita.Controllers
         /// </summary>
         /// <param name="kavitaId"> KavitaId of specific kavita </param>
         /// <returns> "Deleted" </returns>
-        [HttpGet]
+        [HttpDelete]
         [Route("delete/{kavitaId}")]
         public IHttpActionResult DeleteUSer(int kavitaId)
         {
-            BLUser objBLuser = new BLUser();
-            Users objUsers = objBLuser.DeleteKavita(kavitaId);
+            BLKavita objBLKavita = new BLKavita();
+            Kavita.Models.Kavita objKavita = objBLKavita.DeleteKavita(kavitaId);
             return Ok(" Deleted ");
         }
-
     }
 }

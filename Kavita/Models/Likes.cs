@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MongoDB.Bson;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -12,6 +13,11 @@ namespace Kavita.Models
     /// </summary>
     public class Likes
     {
+        /// <summary>
+        /// Default Object Id
+        /// </summary>
+        public ObjectId _id { get; set; }
+
         /// <summary>
         /// Id of kavita in Kavita- Model
         /// </summary>

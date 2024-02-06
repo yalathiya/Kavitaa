@@ -1,4 +1,6 @@
-﻿using System;
+﻿using MongoDB.Bson;
+using MongoDB.Bson.Serialization.Attributes;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -10,6 +12,11 @@ namespace Kavita.Models
     /// </summary>
     public class Users
     {
+        /// <summary>
+        /// Default Object Id
+        /// </summary>
+        public ObjectId _id { get; set; }
+
         /// <summary>
         /// Username is "primary key" here
         /// </summary>

@@ -53,7 +53,7 @@ namespace Kavita.Controllers
         /// </summary>
         /// <param name="objUsers"> Object of Users model </param>
         /// <returns> "Updated" </returns>
-        [HttpPatch]
+        [HttpPut]
         [Route("Update")]
         public IHttpActionResult UpdateUser([FromBody] Users objUsers)
         {
@@ -69,7 +69,7 @@ namespace Kavita.Controllers
         /// </summary>
         /// <param name="username"> Username of the user </param>
         /// <returns> "Deleted" </returns>
-        [HttpGet]
+        [HttpDelete]
         [Route("delete/{username}")]
         public IHttpActionResult DeleteUSer(string username)
         {

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MongoDB.Bson;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -11,7 +12,12 @@ namespace Kavita.Models
     public class Kavita
     {
         /// <summary>
-        /// Kavita Id "PRIMARY KEY"
+        /// Default Object Id
+        /// </summary>
+        public ObjectId _id { get; set; }
+
+        // <summary>
+        /// Kavita Id
         /// </summary>
         public int kavitaId { get; set; }
 
@@ -19,6 +25,11 @@ namespace Kavita.Models
         /// Title of Kavita
         /// </summary>
         public string title { get; set; }
+
+        /// <summary>
+        /// Username of Kavita publisher 
+        /// </summary>
+        public string username { get; set; }
 
         /// <summary>
         /// Content of Kavita
