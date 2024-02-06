@@ -165,7 +165,6 @@
     <Compile Include="BL\BLLogin.cs" />
     <Compile Include="BL\BLUser.cs" />
     <Compile Include="Connection\Connect.cs" />
-    <Compile Include="Connection\Services.cs" />
     <Compile Include="Controllers\CLKavitaController.cs" />
     <Compile Include="Controllers\CLLikeController.cs" />
     <Compile Include="Controllers\CLLoginController.cs" />
@@ -191,6 +190,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Authentication\" />
   </ItemGroup>
   <ItemGroup>
     <Analyzer Include="..\packages\AWSSDK.SecurityToken.3.7.100.14\analyzers\dotnet\cs\AWSSDK.SecurityToken.CodeAnalysis.dll" />
