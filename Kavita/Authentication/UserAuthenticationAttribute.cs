@@ -39,18 +39,23 @@ namespace Kavita.Authentication
                     // To convert string from the base64 encoding 
                     string decodedAuthToken = Encoding.UTF8.GetString(Convert.FromBase64String(authToken));
 
-                    // To Decrypt password
-                    AesAlgo aes = new AesAlgo();
-
                     // To extract username and password
                     string[] credential = decodedAuthToken.Split(':');
                     string username = credential[0];
-                    string password = aes.Decrypt(credential[1]);
+                    //string password = credential[1];
+                    string password = credential[1];
 
                     // If user credential are correct
                     if (BLLogin.Login(username, password))
                     {
                        // Login Success
+                       // Set principal
+                       GenericIdentity identity = new GenericIdentity(username);
+                       identity.AddClaim(new Claim("username", username));
+                       GenericPrincipal principal = new GenericPrincipal(identity, new string[] {"User"});
+                       Thread.CurrentPrincipal = principal;
+                       HttpContext.Current.User = principal;
+
                     }
                     // If user creadential are incorrect
                     else

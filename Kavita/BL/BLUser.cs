@@ -1,4 +1,5 @@
-﻿using Kavita.Connection;
+﻿using Kavita.Authentication;
+using Kavita.Connection;
 using Kavita.Models;
 using Kavita.Security;
 using MongoDB.Bson;
@@ -7,6 +8,7 @@ using MongoDB.Driver;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Web;
 
 namespace Kavita.BL
@@ -48,15 +50,16 @@ namespace Kavita.BL
 
         }
 
-        internal Users DeleteUser(string username)
+        internal Users DeleteUser()
         {
-            var filter = Builders<Users>.Filter.Eq("username", username);
-            return _collectionUser.FindOneAndDelete(filter);
+             var filter = Builders<Users>.Filter.Eq("username", CurrentUser.GetUsername());
+             return _collectionUser.FindOneAndDelete(filter);
         }
 
-        internal Users GetUser(string username)
+        internal Users GetUser()
         {
-            var filter = Builders<Users>.Filter.Eq("username", username);
+            
+            var filter = Builders<Users>.Filter.Eq("username", CurrentUser.GetUsername());
 
             Users objUsers = _collectionUser.Find(filter).FirstOrDefault();
             return objUsers;
@@ -65,14 +68,15 @@ namespace Kavita.BL
 
         internal void UpdateUser(Users objUsers)
         {
-            var filter = Builders<Users>.Filter.Eq("username", objUsers.username);
+            
+                var filter = Builders<Users>.Filter.Eq("username", CurrentUser.GetUsername());
 
-            var update = Builders<Users>.Update
-                .Set("email", objUsers.email)
-                .Set("password", objUsers.password)
-                .Set("username", objUsers.username);
+                var update = Builders<Users>.Update
+                    .Set("email", objUsers.email)
+                    .Set("password", objUsers.password);
 
-            _collectionUser.UpdateOne(filter, update);
+                _collectionUser.UpdateOne(filter, update);
+           
         }
     }
 }

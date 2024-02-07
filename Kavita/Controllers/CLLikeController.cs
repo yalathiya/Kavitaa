@@ -9,16 +9,15 @@ namespace Kavita.Controllers
         /// <summary>
         /// To add like
         /// </summary>
-        /// <param name="username"></param>
         /// <param name="kavitaId"></param>
         /// <returns></returns>
         [HttpPost]
         [UserAuthentication]
-        [Route("api/like/{kavitaId}/{username}")]
-        public IHttpActionResult Like(string username, int kavitaId)
+        [Route("api/like")]
+        public IHttpActionResult Like(int kavitaId)
         {
             BLLike likeManager = new BLLike();
-            likeManager.Like(username, kavitaId);
+            likeManager.Like(kavitaId);
 
             return Ok("Liked");
         }
@@ -26,16 +25,15 @@ namespace Kavita.Controllers
         /// <summary>
         /// To unlike
         /// </summary>
-        /// <param name="username"></param>
         /// <param name="kavitaId"></param>
         /// <returns></returns>
         [HttpPost]
         [UserAuthentication]
-        [Route("api/unlike/{kavitaId}/{username}")]
-        public IHttpActionResult Unike(string username, int kavitaId)
+        [Route("api/unlike")]
+        public IHttpActionResult Unike(int kavitaId)
         {
             BLLike likeManager = new BLLike();
-            likeManager.Unlike(username, kavitaId);
+            likeManager.Unlike(kavitaId);
 
             return Ok("Unliked");
         }

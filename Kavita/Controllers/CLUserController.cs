@@ -19,11 +19,11 @@ namespace Kavita.Controllers
         /// <returns> Object of user </returns>
         [HttpGet]
         [UserAuthentication]
-        [Route("get/{username}")]
-        public IHttpActionResult GetUser(string username)
+        [Route("get")]
+        public IHttpActionResult GetUser()
         {
             BLUser objBLuser = new BLUser();
-            Users objUsers = objBLuser.GetUser(username);
+            Users objUsers = objBLuser.GetUser();
             return Ok(objUsers);
         }
 
@@ -67,12 +67,12 @@ namespace Kavita.Controllers
         /// <param name="username"> Username of the user </param>
         /// <returns> "Deleted" </returns>
         [HttpDelete]
-        [Route("delete/{username}")]
+        [Route("delete")]
         [UserAuthentication]
-        public IHttpActionResult DeleteUSer(string username)
+        public IHttpActionResult DeleteUSer()
         {
             BLUser objBLuser = new BLUser();
-            Users objUsers = objBLuser.DeleteUser(username);
+            Users objUsers = objBLuser.DeleteUser();
             return Ok("Deleted");
         }
 

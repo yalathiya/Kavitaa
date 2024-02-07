@@ -59,6 +59,7 @@ namespace Kavita.BL
             // Implement logout logic if necessary
             // For example, you may need to invalidate a token or clear session data
             // This method is currently empty as it depends on your specific requirements
+            throw new NotImplementedException();
         }
     }
 }

@@ -1,11 +1,8 @@
-﻿using Kavita.Connection;
-using Kavita.Models;
-using MongoDB.Bson;
+﻿using Kavita.Authentication;
+using Kavita.Connection;
 using MongoDB.Driver;
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 
 namespace Kavita.BL
 {
@@ -23,6 +20,10 @@ namespace Kavita.BL
 
         internal void AddKavita(Models.Kavita objKavita)
         {
+            // Set current username & like = 0
+            objKavita.username = CurrentUser.GetUsername();
+            objKavita.like = 0;
+
             var maxKavitaId = _collectionKavita.AsQueryable().Max(k => k.kavitaId);
             objKavita.kavitaId = maxKavitaId + 1;
 
@@ -32,7 +33,16 @@ namespace Kavita.BL
         internal Models.Kavita DeleteKavita(int kavitaId)
         {
             var filter = Builders<Kavita.Models.Kavita>.Filter.Eq("kavitaId", kavitaId);
-            return _collectionKavita.FindOneAndDelete(filter);
+            if(_collectionKavita.Find(filter).FirstOrDefault().username == CurrentUser.GetUsername())
+            {
+                return _collectionKavita.FindOneAndDelete(filter);
+            }
+            // User is trying to delete a kavita which is not published by him/her
+            else
+            {
+                throw new Exception("You're trying to update a poem which is not published by you");
+            }
+
         }
 
         internal Models.Kavita GetKavita(int kavitaId)
@@ -45,14 +55,22 @@ namespace Kavita.BL
 
         internal void UpdateKavita(Models.Kavita objKavita)
         {
-            var filter = Builders<Kavita.Models.Kavita>.Filter.Eq("kavitaId", objKavita.kavitaId);
+            if(objKavita.username == CurrentUser.GetUsername())
+            {
+                var filter = Builders<Kavita.Models.Kavita>.Filter.Eq("kavitaId", objKavita.kavitaId);
 
-            var update = Builders<Kavita.Models.Kavita>.Update
-                .Set("title", objKavita.title)  
-                .Set("content", objKavita.content)
-                .Set("category", objKavita.category);
+                var update = Builders<Kavita.Models.Kavita>.Update
+                    .Set("title", objKavita.title)
+                    .Set("content", objKavita.content)
+                    .Set("category", objKavita.category);
 
-            _collectionKavita.UpdateOne(filter, update);
+                _collectionKavita.UpdateOne(filter, update);
+            }
+            // User is trying to update a kavita which is not published by him/her
+            else
+            {
+                throw new Exception("You're trying to update a poem which is not published by you");
+            }
         }
     }
 }

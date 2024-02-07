@@ -67,7 +67,7 @@ namespace Kavita.Controllers
         /// <param name="kavitaId"> KavitaId of specific kavita </param>
         /// <returns> "Deleted" </returns>
         [HttpDelete]
-        [Route("delete/{kavitaId}")]
+        [Route("delete")]
         [UserAuthentication]
         public IHttpActionResult DeleteUSer(int kavitaId)
         {

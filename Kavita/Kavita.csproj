@@ -160,6 +160,7 @@
   <ItemGroup>
     <Compile Include="App_Start\SwaggerConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Authentication\CurrentUser.cs" />
     <Compile Include="Authentication\UserAuthenticationAttribute.cs" />
     <Compile Include="BL\BLKavita.cs" />
     <Compile Include="BL\BLLike.cs" />
