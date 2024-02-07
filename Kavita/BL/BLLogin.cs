@@ -3,7 +3,6 @@ using Kavita.Models;
 using MongoDB.Driver;
 using System;
 using System.Linq;
-using System.Text;
 
 namespace Kavita.BL
 {

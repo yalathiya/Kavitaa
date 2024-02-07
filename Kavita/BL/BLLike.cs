@@ -4,8 +4,6 @@ using Kavita.Models;
 using MongoDB.Driver;
 using System;
 using System.Linq;
-using System.Security.Claims;
-using System.Web;
 
 namespace Kavita.BL
 {

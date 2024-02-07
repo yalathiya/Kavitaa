@@ -2,14 +2,9 @@
 using Kavita.Connection;
 using Kavita.Models;
 using Kavita.Security;
-using MongoDB.Bson;
-using MongoDB.Bson.Serialization;
 using MongoDB.Driver;
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Security.Claims;
-using System.Web;
 
 namespace Kavita.BL
 {
